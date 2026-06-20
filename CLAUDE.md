@@ -17,9 +17,10 @@ text goes where — no placeholders, no template tokens.
 - The server holds Google OAuth credentials and runs ~330 npm deps, so it
   ALWAYS runs inside Docker (`magslide:latest`) — never on the host.
 - Transport is stdio. `.mcp.json` registers it as `docker run -i --rm`.
-- Auth = 3 env vars: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`,
-  `GOOGLE_REFRESH_TOKEN`. Secrets live in the shell env, never in files
-  (`.mcp.json` only references them via `${VAR}`).
+- Auth = 3 secrets (`GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`,
+  `GOOGLE_REFRESH_TOKEN`) in a gitignored `.env` at the repo root; Docker reads
+  it via `--env-file .env` (relative — launch the MCP client from the repo root).
+  Only `.env.example` is committed.
 
 ## Architecture (`src/`)
 
