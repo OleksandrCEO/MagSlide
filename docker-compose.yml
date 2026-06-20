@@ -1,0 +1,25 @@
+# Convenience wrapper around the MagSlide image.
+#   docker compose build           — build the image (tags magslide:latest)
+#   docker compose up gettoken      — one-off OAuth flow to mint a refresh token
+# The MCP server itself is launched by the MCP client via .mcp.json (docker run),
+# not by compose.
+
+services:
+  # Defines the build → produces magslide:latest, reused by gettoken below.
+  magslide:
+    build: .
+    image: magslide:latest
+    env_file: .env
+    init: true
+    stdin_open: true
+
+  # One-off: prints an auth URL, catches the OAuth callback on :3000,
+  # prints the refresh token. init:true makes Ctrl+C work.
+  gettoken:
+    image: magslide:latest
+    env_file: .env
+    init: true
+    entrypoint: ["node", "build/getRefreshToken.js"]
+    ports:
+      - "3000:3000"
+    profiles: ["tools"]

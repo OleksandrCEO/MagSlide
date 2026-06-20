@@ -2,7 +2,7 @@
 # Multi-stage: deps are installed with --ignore-scripts (no lifecycle code runs),
 # the final image runs as the non-root `node` user with no host filesystem access.
 
-FROM node:24-alpine AS build
+FROM node:20-alpine AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --ignore-scripts
@@ -10,7 +10,7 @@ COPY tsconfig.json ./
 COPY src ./src
 RUN npm run build
 
-FROM node:24-alpine AS prod
+FROM node:20-alpine AS prod
 WORKDIR /app
 ENV NODE_ENV=production
 COPY package.json package-lock.json ./
