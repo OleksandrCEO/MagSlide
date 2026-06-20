@@ -48,6 +48,27 @@ scoped to the new slide — formatting is inherited, never overwritten.
   — publish the app to "Production" for a long-lived token.
 - This is a fork: keep changes minimal and upstream-mergeable.
 
+## Slide text limits (read before writing any slide text)
+
+Line length is CRITICAL: text must never wrap past its line or overflow its
+box. Before writing, open the source slide with `get_page` and read the
+longest existing run — stay at or under it. Cut every qualifier; if a phrase
+needs an extra clause to be "complete", it's too long for the slide.
+
+Measured ceilings for the three layouts in the NixOS deck (Cyrillic, single
+line, at the template font sizes):
+
+- **Title + subtitle ("style-7", e.g. slide `..._55`)** — TITLE ≤ ~28 chars
+  (≤ 7 words); SUBTITLE ≤ ~57 chars. Each stays on ONE line.
+- **Points with descriptions (slide `..._65`)** — bold point title ≤ ~30
+  chars; grey description ≤ ~78 chars. Prefer 5–7 bullets, not 3.
+- **Numbered points (slide `g3e5c26e1b0f_0_0`)** — each item ≤ ~64 chars on
+  one line. Prefer 7–9 items.
+
+Build slides by `duplicateObject` + `replaceAllText` scoped to the new page
+(`pageObjectIds`): swap only the text strings so font/size/colour/bullets are
+inherited exactly. These limits are the user's standard across all decks.
+
 ## Commands
 
 - `docker build -t magslide:latest .` — build the isolated server image.
