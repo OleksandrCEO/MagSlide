@@ -1,7 +1,7 @@
 {
-  "name": "google-slides-mcp",
+  "name": "magslide",
   "version": "0.1.0",
-  "description": "MCP server for Google Slides integration",
+  "description": "MagSlide — MCP server for fast Google Slides content editing & duplication",
   "type": "module",
   "main": "build/index.js",
   "scripts": {

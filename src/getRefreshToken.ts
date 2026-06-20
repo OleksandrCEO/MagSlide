@@ -22,10 +22,9 @@ const oauth2Client = new google.auth.OAuth2(
   REDIRECT_URI
 );
 
-// Set authentication scopes
+// Set authentication scopes — only Slides; no broad Drive access.
 const scopes = [
-  'https://www.googleapis.com/auth/presentations',
-  'https://www.googleapis.com/auth/drive.readonly'
+  'https://www.googleapis.com/auth/presentations'
 ];
 
 async function main() {
@@ -108,9 +107,15 @@ async function main() {
       console.error('Error:', e);
     }
   }).listen(3000, () => {
-    // Open authentication URL in browser
-    console.log('Opening authentication URL...');
-    open(authorizeUrl, { wait: false });
+    // Print the URL (works headless / in a container) and try to open a browser if one exists.
+    console.log('\n=== Open this URL in your browser to authorize ===');
+    console.log(authorizeUrl);
+    console.log('==================================================\n');
+    try {
+      open(authorizeUrl, { wait: false });
+    } catch {
+      // No browser available (e.g. inside Docker) — the printed URL above is the fallback.
+    }
   });
 
   destroyer(server);

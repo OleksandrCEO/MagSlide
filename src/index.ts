@@ -17,7 +17,7 @@ const initializeAndRunServer = async () => {
   try {
     const server = new Server(
       {
-        name: 'google-slides-mcp',
+        name: 'magslide',
         version: '0.1.0',
       },
       {
@@ -54,7 +54,7 @@ const initializeAndRunServer = async () => {
 
     const transport = new StdioServerTransport();
     await server.connect(transport);
-    console.error('Google Slides MCP server running and connected via stdio.');
+    console.error('MagSlide MCP server running and connected via stdio.');
   } catch (error: unknown) {
     const errorMessage = getStartupErrorMessage(error);
     console.error('Failed to start Google Slides MCP server:', errorMessage, error);

@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "magslide": {
+      "command": "docker",
+      "args": [
+        "run", "-i", "--rm",
+        "-e", "GOOGLE_CLIENT_ID",
+        "-e", "GOOGLE_CLIENT_SECRET",
+        "-e", "GOOGLE_REFRESH_TOKEN",
+        "magslide:latest"
+      ],
+      "env": {
+        "GOOGLE_CLIENT_ID": "${GOOGLE_CLIENT_ID}",
+        "GOOGLE_CLIENT_SECRET": "${GOOGLE_CLIENT_SECRET}",
+        "GOOGLE_REFRESH_TOKEN": "${GOOGLE_REFRESH_TOKEN}"
+      }
+    }
+  }
+}
