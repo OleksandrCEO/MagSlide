@@ -1,0 +1,10 @@
+{
+  "enabledMcpjsonServers": [
+    "magslide"
+  ],
+  "permissions": {
+    "allow": [
+      "mcp__magslide"
+    ]
+  }
+}
